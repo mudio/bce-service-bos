@@ -7,7 +7,6 @@
 
 import React from 'react';
 import {render} from 'react-dom';
-import {ipcRenderer} from 'electron';
 import {Provider} from 'react-redux';
 import {Router, hashHistory} from 'react-router';
 import {syncHistoryWithStore} from 'react-router-redux';
@@ -16,24 +15,18 @@ import './style/mixin.global.css';
 import routes from './routes';
 import configureStore from './store/configureStore';
 
-const cache = JSON.parse(localStorage.getItem('cache')) || {};
-window.globalStore = configureStore(cache);
-const history = syncHistoryWithStore(hashHistory, window.globalStore);
+const cache = JSON.parse(localStorage.getItem('bos')) || {};
+const _store = configureStore(cache);
+const history = syncHistoryWithStore(hashHistory, _store);
 
-window.globalStore.subscribe(() => {
-    const {navigator, auth, uploads, downloads} = window.globalStore.getState();
-    localStorage.setItem('cache', JSON.stringify({auth, uploads, downloads, navigator}));
-});
-
-ipcRenderer.on('notify', (event, type, message) => {
-    if (type) {
-        window.globalStore.dispatch({type, message});
-    }
+_store.subscribe(() => {
+    const {navigator, uploads, downloads} = _store.getState();
+    localStorage.setItem('bos', JSON.stringify({uploads, downloads, navigator}));
 });
 
 export default function startup(container) {
     render(
-        <Provider store={window.globalStore}>
+        <Provider store={_store}>
             <Router history={history} routes={routes} />
         </Provider>,
         container

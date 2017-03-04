@@ -1,9 +1,8 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 
 import {expect} from 'chai';
-import counter from '../../app/bos/reducers/auth';
-import {INCREMENT_COUNTER, DECREMENT_COUNTER} from '../../app/bos/actions/login';
-
+import counter from '../../app/bce/reducers/auth';
+import {INCREMENT_COUNTER, DECREMENT_COUNTER} from '../../app/bce/actions/login';
 
 describe('reducers', () => {
     describe('counter', () => {

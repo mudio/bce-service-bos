@@ -14,7 +14,9 @@ import './style/mixin.global.css';
 import Extensions from './components/Extensions';
 import LoginPage from './containers/LoginPage';
 import configureStore from './store/configureStore';
+import bosBootstarp from '../bos/index';
 
+const container = document.getElementById('main');
 const extensions = document.getElementById('extensions');
 const cache = JSON.parse(localStorage.getItem('cache')) || {};
 
@@ -36,12 +38,13 @@ function renderLoginPage() {
         <Provider store={window.globalStore}>
             <LoginPage />
         </Provider>
-        , document.getElementById('main')
+        , container
     );
 }
 
 function renderHomePage() {
     render(<Extensions />, extensions);
+    bosBootstarp(container);
 
     document.body.onkeypress = ({code, target}) => {
         if (target.tagName === 'INPUT') {

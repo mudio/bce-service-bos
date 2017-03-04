@@ -9,9 +9,8 @@ import {
     Simulate
 } from 'react-addons-test-utils';
 import {Provider} from 'react-redux';
-import LoginPage from '../../app/bos/containers/LoginPage';
-import configureStore from '../../app/bos/store/configureStore';
-
+import LoginPage from '../../app/bce/containers/LoginPage';
+import configureStore from '../../app/bce/store/configureStore';
 
 function setup(initialState) {
     const store = configureStore(initialState);

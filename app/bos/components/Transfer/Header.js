@@ -9,12 +9,10 @@ import classnames from 'classnames';
 import React, {Component, PropTypes} from 'react';
 
 import styles from './Header.css';
-import SystemBar from '../Common/SystemBar';
 import {TransCategory} from '../../utils/BosType';
 import {clearFinish} from '../../actions/transfer';
 import {uploadStart, uploadSuspend} from '../../actions/uploader';
 import {downloadStart, downloadSuspend} from '../../actions/downloader';
-
 
 export default class Header extends Component {
     static propTypes = {
@@ -84,11 +82,11 @@ export default class Header extends Component {
             return null;
         }
     }
+
     render() {
         return (
             <div className={styles.container}>
                 {this.renderCategory()}
-                <SystemBar />
             </div>
         );
     }
